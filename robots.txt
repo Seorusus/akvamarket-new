@@ -1,0 +1,31 @@
+User-Agent: *
+
+Disallow: /admin
+Disallow: /comment/reply
+Disallow: /contact
+Disallow: /logout
+Disallow: /node/add
+Disallow: /search
+Disallow: /user
+Disallow: /?q=admin
+Disallow: /?q=comment/reply
+Disallow: /?q=contact
+Disallow: /?q=logout
+Disallow: /?q=node/add
+Disallow: /?q=search
+Disallow: /?q=user
+Sitemap: http://akvamarket.kiev.ua/sitemap.xml
+
+User-agent: Yahoo
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: Mediapartners-Google
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+Host: http://akvamarket.kiev.ua

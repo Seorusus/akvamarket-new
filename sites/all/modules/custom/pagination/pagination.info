@@ -1,0 +1,7 @@
+name=Pagination
+
+description= Added rel="next" и rel="prev" for page pagination
+
+package=Custom
+
+core=7.x
