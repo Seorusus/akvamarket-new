@@ -33,7 +33,8 @@ function local_taxonomy_service_form($form_values, $service_info) {
   // List available files
   $search_paths = array(
     drupal_get_path('module', 'taxonomy_xml') . '/samples',
-    // add more?
+    'public://taxonomy_xml',
+    //'private://taxonomy_xml',
   );
   $files = array();
   foreach ($search_paths as $search_path) {
@@ -47,6 +48,7 @@ function local_taxonomy_service_form($form_values, $service_info) {
     '#type' => 'select',
     '#title' => t('File to import'),
     '#options' => $files,
+    '#description' => t('Files can be made available by placing them in the sites filesystem at either public://taxonomy_xml or private://taxonomy_xml'),
   );
   $formats = taxonomy_xml_formats();
   $form['format'] = array(

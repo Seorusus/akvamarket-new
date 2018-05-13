@@ -4,10 +4,12 @@
  * @file
  * Tests for the UcAddress class.
  */
+
 /**
  * Tests for the Ubercart Ajax Attach.
  */
 class UbercartAjaxTestCase extends UbercartTestHelper {
+
   public static function getInfo() {
     return array(
       'name' => 'Ajax functionality',
@@ -19,7 +21,7 @@ class UbercartAjaxTestCase extends UbercartTestHelper {
   /**
    * Overrides DrupalWebTestCase::setUp().
    */
-  public function setUp() {
+  protected function setUp($modules = array(), $permissions = array()) {
     module_load_include('inc', 'uc_store', 'includes/uc_ajax_attach');
     $modules = array('rules_admin', 'uc_payment', 'uc_payment_pack');
     $permissions = array('administer rules', 'bypass rules access');
@@ -37,7 +39,7 @@ class UbercartAjaxTestCase extends UbercartTestHelper {
    * @param $negate
    *   TRUE to negate the condition.
    */
-  function addPaymentZoneCondition($method, $zone, $negate = FALSE) {
+  protected function addPaymentZoneCondition($method, $zone, $negate = FALSE) {
     $not = $negate ? 'NOT ' : '';
     $name = 'uc_payment_method_' . $method;
     $label = ucfirst($method) . ' conditions';
@@ -72,7 +74,7 @@ class UbercartAjaxTestCase extends UbercartTestHelper {
     //$this->drupalGet('admin/config/workflow/rules/components/manage/' . $newconfig->id);
   }
 
-  function testCheckoutAjax() {
+  public function testCheckoutAjax() {
     // Enable two payment methods and set a condition on one.
     variable_set('uc_payment_method_check_checkout', TRUE);
     variable_set('uc_payment_method_other_checkout', TRUE);
@@ -100,4 +102,5 @@ class UbercartAjaxTestCase extends UbercartTestHelper {
     // Not in Kansas any more...
     $this->assertNoText("Other");
   }
+
 }

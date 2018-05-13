@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Primary hook implementations for Yoast SEO for Drupal module.
@@ -9,13 +10,13 @@
  */
 function yoast_seo_permission() {
   $permissions['administer yoast seo'] = array(
-    'title' => t('Administer Yoast SEO for Drupal'),
+    'title' => t('Administer Real-time SEO for Drupal'),
     'restrict access' => TRUE,
     'description' => t('Control the main settings pages and configure the settings per content types.'),
   );
   $permissions['use yoast seo'] = array(
-    'title' => t('Use Yoast SEO for Drupal'),
-    'description' => t('Modify Yoast SEO for Drupal configuration per individual nodes.'),
+    'title' => t('Use Real-time SEO for Drupal'),
+    'description' => t('Modify Realtime SEO for Drupal configuration per individual nodes.'),
   );
 
   return $permissions;
@@ -26,8 +27,8 @@ function yoast_seo_permission() {
  */
 function yoast_seo_menu() {
   $items['admin/config/search/yoast'] = array(
-    'title' => 'Yoast SEO for Drupal',
-    'description' => 'Configure Yoast SEO for Drupal settings',
+    'title' => 'Real-time SEO for Drupal',
+    'description' => 'Configure Real-time SEO for Drupal settings',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('yoast_seo_admin_settings_form'),
     'access arguments' => array('administer yoast seo'),
@@ -59,53 +60,54 @@ function yoast_seo_views_api() {
  *   - token types: An array of token types to be passed to theme_token_tree().
  */
 function yoast_seo_configuration_form(array &$form, $instance, array $options = array()) {
-  // Work out the language code to use, default to NONE.
-  if (!empty($form['#entity_type'])) {
-    if (!empty($form['#entity'])) {
-      $langcode = entity_language($form['#entity_type'], (object) $form['#entity']);
-    }
-  }
-
-  if (empty($langcode)) {
-    $langcode = LANGUAGE_NONE;
-  }
-
-  // Merge in the default options.
-  $options += array(
-    'instance' => $instance,
-  );
-
-  $form['yoast_seo'] = array(
-    '#type' => 'container',
-    '#title' => t('Yoast SEO'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#multilingual' => TRUE,
-    '#tree' => TRUE,
-    '#access' => (user_access('use yoast seo') || user_access('administer yoast seo')) && (user_access('edit meta tags') || user_access('administer meta tags')) && (user_access('create url aliases') || user_access('administer url aliases')),
-    '#weight' => 35,
-    '#language' => $langcode,
-    '#attributes' => array(
-      'class' => array('yoast-seo-form'),
-    ),
-  );
-  $form['yoast_seo'][$langcode] = array(
-    '#type' => 'container',
-    '#multilingual' => TRUE,
-    '#tree' => TRUE,
-  );
-
-  // Only support vertical tabs if there is a vertical tab element.
-  foreach (element_children($form) as $key) {
-    if (isset($form[$key]['#type']) && $form[$key]['#type'] == 'vertical_tabs') {
-      $form['yoast_seo']['#group'] = $key;
-      break;
-    }
-  }
-
   // Making sure we have the necessary form elements and we have access to the
   // form elements. Otherwise we're executing code we'll never use.
-  if (_yoast_check_fields_access($form)) {
+  if (!empty($form['path']['#access']) && !empty($form['metatags']['#access']) && (user_access('use yoast seo') || user_access('administer yoast seo'))) {
+
+    // Work out the language code to use, default to NONE.
+    if (!empty($form['#entity_type'])) {
+      if (!empty($form['#entity'])) {
+        $langcode = entity_language($form['#entity_type'], (object) $form['#entity']);
+      }
+
+      if (empty($langcode)) {
+        $langcode = LANGUAGE_NONE;
+      }
+    }
+
+    // Merge in the default options.
+    $options += array(
+      'instance' => $instance,
+    );
+
+    $form['yoast_seo'] = array(
+      '#type' => 'container',
+      '#title' => t('Real-time SEO'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#multilingual' => TRUE,
+      '#tree' => TRUE,
+      '#weight' => 35,
+      '#language' => $langcode,
+      '#attributes' => array(
+        'class' => array('yoast-seo-form'),
+      ),
+    );
+
+    $form['yoast_seo'][$langcode] = array(
+      '#type' => 'container',
+      '#multilingual' => TRUE,
+      '#tree' => TRUE,
+    );
+
+    // Only support vertical tabs if there is a vertical tab element.
+    foreach (element_children($form) as $key) {
+      if (isset($form[$key]['#type']) && $form[$key]['#type'] == 'vertical_tabs') {
+        $form['yoast_seo']['#group'] = $key;
+        break;
+      }
+    }
+
     $metatag_config = metatag_config_load_with_defaults($options['instance']);
     $new_entity = empty($form['#entity']->nid) ? TRUE : FALSE;
 
@@ -131,7 +133,7 @@ function yoast_seo_configuration_form(array &$form, $instance, array $options = 
       // Checking to see if we have to empty the default value or not.
       if ($form['metatags'][$langcode]['basic']['title']['value']['#default_value'] == $metatag_config['title']['value']) {
         if ($new_entity) {
-          $form['metatags'][$langcode]['basic']['title']['value']['#default_value'] = '';
+          $form['metatags'][$langcode]['basic']['title']['value']['#default_value'] = $metatag_config['title']['value'];
         }
         else {
           $form['metatags'][$langcode]['basic']['title']['value']['#default_value'] = token_replace($metatag_config['title']['value'], array('node' => $form['#entity']));
@@ -142,11 +144,11 @@ function yoast_seo_configuration_form(array &$form, $instance, array $options = 
     // Set placeholder tekst if there is a default in metatags and it is a new
     // entity. This means we have some default configuration for the
     // description.
-    if (!empty($form['metatags'][$langcode]['basic']['description'])) {
+    if (!empty($form['metatags'][$langcode]['basic']['description']) && isset($metatag_config['description'])) {
       // Checking to see if we have to empty the default value or not.
       if ($form['metatags'][$langcode]['basic']['description']['value']['#default_value'] == $metatag_config['description']['value']) {
         if ($new_entity) {
-          $form['metatags'][$langcode]['basic']['description']['value']['#default_value'] = '';
+          $form['metatags'][$langcode]['basic']['description']['value']['#default_value'] = $metatag_config['description']['value'];
         }
         else {
           $form['metatags'][$langcode]['basic']['description']['value']['#default_value'] = token_replace($metatag_config['description']['value'], array('node' => $form['#entity']));
@@ -165,8 +167,10 @@ function yoast_seo_configuration_form(array &$form, $instance, array $options = 
 }
 
 /**
- * Actually we need access to all fields listed or selected
+ * Actually we need access to all fields listed or selected.
+ *
  * @param array $form
+ *
  * @return bool
  */
 function _yoast_check_fields_access(array $form) {
@@ -245,7 +249,8 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
     $langcode = LANGUAGE_NONE;
   }
 
-  // Lets put the container in the bottom of page, above additional_settings tabs.
+  // Lets put the container in the bottom of page, above additional_settings
+  // tabs.
   $form['yoast_seo']['#weight'] = $form['additional_settings']['#weight'] - 2;
 
   // Generate unique HTML IDs.
@@ -256,7 +261,7 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
   $score = !empty($form['yoast_seo'][$langcode]['seo_status']['#value']) ? yoast_seo_score_rating($form['yoast_seo'][$langcode]['seo_status']['#value']) : yoast_seo_score_rating(0);
 
   // Add the Yoast SEO title before the wrapper.
-  $form['yoast_seo'][$langcode]['focus_keyword']['#prefix'] = '<h3 class="wrapper-title">' . t('Yoast SEO for Drupal') . '</h3>';
+  $form['yoast_seo'][$langcode]['focus_keyword']['#prefix'] = '<h3 class="wrapper-title">' . t('Real-time SEO for Drupal') . '</h3>';
 
   // Output the overall score next to the focus keyword.
   $form['yoast_seo'][$langcode]['focus_keyword']['#suffix'] = '<div id="yoast-overallscore" class="overallScore ' . $score . '">
@@ -264,15 +269,10 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
   <span class="score_title">' . t('SEO') . ': <strong>' . $score . '</strong></span>
   </div>';
 
-  // Template for the newsletter.
-  $snippet_tpl = array('#theme' => 'yoast_newsletter');
-  $newsletter_markup = theme($snippet_tpl);
-
   // Output the markup for the snippet and overall score above the body field.
   $form['yoast_seo'][$langcode]['snippet_analysis'] = array(
     '#weight' => $form['yoast_seo']['#weight'] - 1,
     '#markup' => '<div id="' . $wrapper_target_id . '"><div id="wpseo_meta"></div><label>' . t('Snippet editor') . '</label><div id="' . $snippet_target_id . '"></div><label>' . t('Content analysis') . '</label><div id="' . $output_target_id . '"></div></div>',
-    '#suffix' => $newsletter_markup,
   );
 
   // Minified JS file.
@@ -302,7 +302,7 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
     $seo_title_overwritten = TRUE;
   }
 
-  // Collect all body fields and field id's
+  // Collect all body fields and field id's.
   $text_content = array();
   if (isset($form['body'])) {
     // We use the language of the body element so we know where to add the
@@ -313,7 +313,7 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
 
   $yoast_fields = variable_get('yoast_seo_body_fields_' . $form['#bundle'], array());
   foreach ($yoast_fields as $yoast_field) {
-    // We use the language of the field element
+    // We use the language of the field element.
     $field_language = $form[$yoast_field]['#language'];
     $text_content += _yoast_seo_process_field($form[$yoast_field][$field_language]);
   }
@@ -338,11 +338,11 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
     'fields' => array(
       'focusKeyword' => $form['yoast_seo'][$langcode]['focus_keyword']['#id'],
       'seoStatus' => $form['yoast_seo'][$langcode]['seo_status']['#attributes']['id'],
-      'pageTitle' => $form['metatags'][$langcode]['basic']['title']['value']['#id'],
+      'pageTitle' => (module_exists('seo_ui')) ? $form['seo_vtab']['metatags_title']['title']['value']['#id'] : $form['metatags'][$langcode]['basic']['title']['value']['#id'],
       'nodeTitle' => $form['title']['#id'],
-      'description' => $form['metatags'][$langcode]['basic']['description']['value']['#id'],
+      'description' => (module_exists('seo_ui')) ? $form['seo_vtab']['metatags'][$langcode]['basic']['description']['value']['#id'] : $form['metatags'][$langcode]['basic']['description']['value']['#id'],
       'bodyText' => array_keys($text_content),
-      'url' => $form['path']['alias']['#id'],
+      'url' => (module_exists('seo_ui')) ? $form['seo_vtab']['path']['alias']['#id'] : $form['path']['alias']['#id'],
     ),
     'placeholderText' => array(
       'title' => t('Please click here to alter your page meta title'),
@@ -365,9 +365,10 @@ function yoast_seo_configuration_form_after_build($form, &$form_state) {
 }
 
 /**
- * Helper function that extracts field values and id's
+ * Helper function that extracts field values and id's.
  *
  * @param array $field
+ *
  * @return array
  */
 function _yoast_seo_process_field(array $field) {
@@ -381,7 +382,7 @@ function _yoast_seo_process_field(array $field) {
     }
   }
   else {
-    // Multi field
+    // Multi field.
     for ($i = 0; $i <= $field['#max_delta']; $i++) {
       $fields_content[$field[$i]['value']['#id']] = '';
       if (isset($field[$i]['value']['#default_value']) && !empty($field[$i]['value']['#default_value'])) {
@@ -476,19 +477,6 @@ function yoast_seo_form_node_admin_content_alter(&$form, &$form_state, $form_id)
 }
 
 /**
- * Implements hook_theme().
- */
-function yoast_seo_theme(&$existing, &$type, &$theme, &$path) {
-  $theme = array();
-  $theme['yoast_newsletter'] = array(
-    'template' => 'newsletter',
-    'path' => drupal_get_path('module', 'yoast_seo') . '/templates',
-  );
-
-  return $theme;
-}
-
-/**
  * Load an entity's SEO info.
  *
  * @param string $entity_type
@@ -578,7 +566,7 @@ function yoast_seo_configuration_load_multiple($entity_type, array $entity_ids, 
   // Also need to check if the Yoast SEO table exists since this condition could
   // fire before the table has been installed yet.
   if (!db_table_exists('yoast_seo')) {
-    watchdog('yoast_seo', 'The system tried to load Yoast SEO for Drupal data before the schema was fully loaded.', array(), WATCHDOG_WARNING);
+    watchdog('yoast_seo', 'The system tried to load Real-time SEO for Drupal data before the schema was fully loaded.', array(), WATCHDOG_WARNING);
     return array();
   }
 
@@ -909,7 +897,7 @@ function yoast_seo_entity_supports_yoast_seo($entity_type = NULL, $bundle = NULL
         //
         // // Disable metatags for file_entity.
         // $conf['metatag_enable_file'] = FALSE;
-        //
+        // .
         // @see Settings page.
         if (variable_get('yoast_seo_enable_' . $entity_name, FALSE) == FALSE) {
           $entity_types[$entity_name] = FALSE;

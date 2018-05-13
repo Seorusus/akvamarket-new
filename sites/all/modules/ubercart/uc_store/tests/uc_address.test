@@ -21,11 +21,10 @@ class UbercartAddressTestCase extends UbercartTestHelper {
     );
   }
 
-
   /**
    * Overrides DrupalWebTestCase::setUp().
    */
-  public function setUp() {
+  protected function setUp($modules = array(), $permissions = array()) {
     parent::setUp();
 
     // Create a random address object for use in tests.
@@ -50,7 +49,7 @@ class UbercartAddressTestCase extends UbercartTestHelper {
   /**
    * Tests comparison of address objects.
    */
-  function testAddressComparison() {
+  public function testAddressComparison() {
     $address1 = $this->test_address[0];
     $address2 = $this->test_address[1];
 

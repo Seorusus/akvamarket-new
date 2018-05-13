@@ -151,7 +151,9 @@ YoastSEO_DrupalSource.prototype.parseSnippetData = function(source, target) {
     document.getElementById(target).value = (ev.target.value || "");
     this.triggerEvent(target);
   }.bind(this);
-  document.getElementById(source).addEventListener("blur", listener);
+  if (document.getElementById(source) !== null) {
+    document.getElementById(source).addEventListener('blur', listener);
+  }
 };
 
 
@@ -203,7 +205,8 @@ YoastSEO_DrupalSource.prototype.getDataFromInput = function( field ) {
 
     return output.join("\n");
   }else{
-    return document.getElementById(this.config.fields[field]).value;
+    var fieldElem = document.getElementById(this.config.fields[field]);
+    return (fieldElem !== null) ? fieldElem.value : '';
   }
 };
 

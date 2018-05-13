@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the Metatag: Verification module.
@@ -25,12 +26,6 @@ function metatag_verification_metatag_info() {
     'context' => array('global'),
     'group' => 'verification',
   );
-
-  $info['tags']['alexaVerifyID'] = array(
-    'label' => t('Alexa'),
-    'description' => t('A string provided by <a href="@alexa">Alexa</a>, which can be obtained from the <a href="@verify_url">Alexa "Claim Your Site" page</a>.', array('@alexa' => 'http://www.alexa.com/', '@verify_url' => 'http://www.alexa.com/siteowners/claim')),
-    'weight' => ++$weight,
-  ) + $defaults;
 
   $info['tags']['msvalidate.01'] = array(
     'label' => t('Bing'),
@@ -62,14 +57,11 @@ function metatag_verification_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['y_key'] = array(
-    'label' => t('Yahoo'),
-    'description' => t('A string provided by <a href="@yahoo">Yahoo</a>.', array('@yahoo' => 'http://www.yahoo.com/')),
+  $info['tags']['yandex-verification'] = array(
+    'label' => t('Yandex'),
+    'description' => t('A string provided by <a href="@yandex">Yandex</a>, full details are available from the <a href="@verify_url">Yandex online help</a>.', array('@yandex' => 'http://www.yandex.com/', '@verify_url' => 'http://api.yandex.com/webmaster/doc/dg/reference/hosts-type.xml')),
     'weight' => ++$weight,
   ) + $defaults;
 
-
-
-	
   return $info;
 }

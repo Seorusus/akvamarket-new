@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @file yoast.forms.inc
+ * @file
  * Contains node form alters.
  */
 
 /**
  * Adds extra settings to the node content type edit page.
  *
- * @param $form
+ * @param array $form
  *   Node settings form.
  */
 function _yoast_seo_process_node_settings_form(&$form) {
@@ -16,7 +17,7 @@ function _yoast_seo_process_node_settings_form(&$form) {
   if (isset($form['type'])) {
     $form['yoast_seo'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Yoast SEO for Drupal settings'),
+      '#title' => t('Real-time SEO for Drupal settings'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#group' => 'additional_settings',
@@ -38,8 +39,9 @@ function _yoast_seo_process_node_settings_form(&$form) {
       }
     }
 
-    /**
-     * @todo remove this after https://www.drupal.org/node/1149078 was fixed and use
+    /*
+     * @todo remove this after https://www.drupal.org/node/1149078 was fixed
+     * and use
      * $states = array(
      * 'disabled' => array(
      * ':input[name=yoast_seo_body_fields[]]' => array('value' => array('0')),
@@ -57,25 +59,25 @@ function _yoast_seo_process_node_settings_form(&$form) {
     $body_fields = variable_get('yoast_seo_body_fields_' . $node_type, array());
     if (!isset($fields['body']) && !empty($node_type) && empty($body_fields)) {
       $default = FALSE;
-      $description = t('Yoast SEO for Drupal cannot be enabled, because this content type does not have a body field. Add a body field !url.', array('!url' => l(t('here'), 'admin/structure/types/manage/' . $form['#node_type']->type . '/fields')));
+      $description = t('Real-time SEO for Drupal cannot be enabled, because this content type does not have a body field. Add a body field !url.', array('!url' => l(t('here'), 'admin/structure/types/manage/' . $form['#node_type']->type . '/fields')));
       $disabled = TRUE;
       $states = array(
         'enabled' => array(
-          $conditions
+          $conditions,
         ),
       );
     }
     else {
       if (isset($fields['body'])) {
-        // if we have body we skip conditions
+        // If we have body we skip conditions.
         $conditions = array();
       }
       $default = variable_get('yoast_seo_enable_node__' . $node_type, TRUE);
-      $description = t('Enable Yoast SEO for Drupal for this content type.');
+      $description = t('Enable Real-time SEO for Drupal for this content type.');
       $disabled = FALSE;
       $states = array(
         'enabled' => array(
-          $conditions
+          $conditions,
         ),
       );
     }
@@ -89,18 +91,19 @@ function _yoast_seo_process_node_settings_form(&$form) {
       '#states' => $states,
     );
 
-
-    /**
-     * Here we allow users to use different fields or multiple for using instead of body.
-     * @todo change this to multiselect after https://www.drupal.org/node/1149078 was fixed
+    /*
+     * Here we allow users to use different fields or multiple for using
+     * instead of body.
+     * @todo change this to multiselect after
+     * https://www.drupal.org/node/1149078 was fixed
      * '#type' => 'select',
      * '#multiple' => TRUE,
      */
     if (empty($body_fields)) {
-      $description = t('There is no filed that can be used as additional field.');
+      $description = t('There are no other text fields that could be used instead of the Body field.');
     }
     else {
-      $description = t('Select fields to use instead or in addition to body for Yoast SEO. Access to all fields must be allowed.');
+      $description = t('Select fields to use instead, or in addition to body for Real-time SEO. Access to all fields must be allowed.');
     }
 
     $form['yoast_seo']['yoast_seo_body']['yoast_seo_body_fields'] = array(

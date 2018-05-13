@@ -2,9 +2,12 @@
 
 /**
  * @file
- * Ubercart payment related tests
+ * Ubercart payment related tests.
  */
 
+/**
+ * Tests the checkout payment pane.
+ */
 class UbercartPaymentPaneTestCase extends UbercartTestHelper {
 
   public static function getInfo() {
@@ -18,7 +21,7 @@ class UbercartPaymentPaneTestCase extends UbercartTestHelper {
   /**
    * Overrides DrupalWebTestCase::setUp().
    */
-  public function setUp() {
+  protected function setUp($modules = array(), $permissions = array()) {
     parent::setUp(array('uc_payment', 'uc_payment_pack'));
     $this->drupalLogin($this->adminUser);
     $this->drupalPost('node/' . $this->product->nid, array(), t('Add to cart'));
@@ -72,7 +75,8 @@ class UbercartPaymentPaneTestCase extends UbercartTestHelper {
     $this->assertNoText('No payment required');
     $this->assertNoText('Subtotal: $0.00');
 
-    // Check that a mixture of free and paid products cannot be purchased for free.
+    // Check that a mixture of free and paid products
+    // cannot be purchased for free.
     $this->drupalPost('node/' . $free_product->nid, array(), t('Add to cart'));
     $this->drupalGet('cart/checkout');
     $this->assertText('Check or money order');
@@ -92,4 +96,5 @@ class UbercartPaymentPaneTestCase extends UbercartTestHelper {
     $this->assertNoText('Select a payment method from the following options.');
     $this->assertFieldByXPath("//input[@name='panes[payment][payment_method]' and @disabled='disabled']");
   }
+
 }
