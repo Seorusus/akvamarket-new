@@ -31,7 +31,7 @@ DirectoryIndex index.php index.html index.htm
 #   php_flag session.auto_start               off
 #  php_value mbstring.http_input             pass
 #   php_value mbstring.http_output            pass
-   php_flag mbstring.encoding_translation    0
+#   php_flag mbstring.encoding_translation    0
 </IfModule>
 
 # Requires mod_expires to be enabled.

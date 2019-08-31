@@ -2,5 +2,5 @@
 name = Stability theme module
 description = Functions for Stability theme
 package = "NikaDevs"
-version = "7.x - 1.2"
+version = "7.x - 1.7"
 core = 7.x

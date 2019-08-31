@@ -1,13 +1,10 @@
 (function ($) {
 
+  var cache_shortcode = [];
+
   $.fn.outerHTML = function() {
     return $('<div />').append(this.eq(0).clone()).html();
   };
-
-  $(document).on('focusin', function(e) {
-  //  e.stopImmediatePropagation();
-  });
-
 
   orig_allowInteraction = $.ui.dialog.prototype._allowInteraction;
   $.ui.dialog.prototype._allowInteraction = function(event) {
@@ -51,9 +48,11 @@
   Drupal.behaviors.nd_visualshortcodes = {
     attach: function (context, settings) {
 
+      $('.nd_visualshortcodes_links:not(.default-hide-processed)', context).once('default-hide').hide();
+
       // Load Visual Shortcodes layout
       $('.nd_visualshortcodes_links:not(.nd-visual-shortcodes-processed)', context).once('nd-visual-shortcodes').click(function() {
-        if(!Drupal.settings.nd_visualshortcodes.formats[$(this).attr('data-format')]) {
+        if(!Drupal.settings.nd_visualshortcodes.formats[$(this).data('format')]) {
           return;
         }
         // Remove the old Layout
@@ -66,10 +65,10 @@
           $.ajax({
             async: false,
             type: 'POST',
-            url: Drupal.settings.basePath + '?q=admin/ajax/nd_visualshortcodes/ajax_backend_layout',
+            url: Drupal.settings.basePath + '?q=ajax/nd_visualshortcodes/ajax_backend_layout',
             data: {
               code: shortcode,
-              format : $(this).attr('data-format')
+              format : $(this).data('format')
             },
             dataType: 'html',
             success: function(layout) {
@@ -111,6 +110,7 @@
       $('.shortcode-settings:not(.nd-visualshortcodes-processed)', context).once('nd-visualshortcodes').click(function() {        
         nd_visualshortcodes_add_overlay();
         $this = $(this).closest('.shortcode-processed');
+        $(this).parents('.nd_visualshortcodes').addClass('nd_active_layout');
         $('.shortcode-opened-settings').removeClass('shortcode-opened-settings');
         // Mark shortcode which opened the Settings Form
         $this.addClass('shortcode-opened-settings');
@@ -122,7 +122,7 @@
           html = html.replace(/\{\{/g, '[').replace(/\}\}/g, ']')
         }
         // Load the Settings form via default Drupal AJAX request
-        var ajax = new Drupal.ajax(false, '#doesnt-matter', {url : Drupal.settings.basePath + '?q=admin/ajax/nd_visualshortcodes/ajax_backend_shortcode'});
+        var ajax = new Drupal.ajax(false, '#doesnt-matter', {url : Drupal.settings.basePath + '?q=admin_ajax/nd_visualshortcodes/ajax_backend_shortcode'});
         ajax.beforeSerialize = function (element_settings, options) {
           options['data']['shortcode'] = $this.attr('shortcode');
           options['data']['attrs'] = attrs_array;
@@ -152,15 +152,25 @@
 
       // Update Visual Shortcode status upon Textarea format is changed
       $('.filter-list:not(.nd-visual-shortcodes-format-processed)', context).once('nd-visual-shortcodes-format').change(function() {
-        if(typeof(Drupal.settings.nd_visualshortcodes.formats[$(this).val()]) != 'undefined' && Drupal.settings.nd_visualshortcodes.formats[$(this).val()]) {
+
+        // Disable visual shortcodes if they enabled because the text format is changed
+        var text_link = $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links:first').text(),
+            text_disable_link = $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links').data('disable-text'),
+            format_link = $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links').data('format');
+        if(text_link == text_disable_link && format_link != $(this).val()) {
+          $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links').click();
+        }
+
+        if(typeof(Drupal.settings.nd_visualshortcodes.formats) != 'undefined' && typeof(Drupal.settings.nd_visualshortcodes.formats[$(this).val()]) != 'undefined' && Drupal.settings.nd_visualshortcodes.formats[$(this).val()]) {
           // Setup the format for easy use then Layout will be rendered
-          $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links').attr('data-format', $(this).val());
+          $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links').data('format', $(this).val());
           $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links, .nd_visualshortcodes').show();
         }
         else {
           $(this).parents('.text-format-wrapper').find('.nd_visualshortcodes_links, .nd_visualshortcodes').hide();
           $(this).parents('.text-format-wrapper').find('.form-textarea').show();
         }
+
       });
 
       // Update all Visual Shortcode link status
@@ -249,11 +259,13 @@
     $('.nd_visualshortcodes_save_render .border-style > .hidden').each(function() {
       $(this).parent().html($(this).html().replace(/\[/g, '{{').replace(/\]/g, '}}'));
     });
+
     // Remove styling tags
     $('.nd_visualshortcodes_save_render').find('.border-style').each(function() {
       _nd_visualshortcodes_remove_borders($(this));
     });
-    $('.nd_visualshortcodes_save_render').find('.nd-visualshortcodes-settings-links, .shortcode-processed > h3, .nd-visualshortcodes-remove').remove();
+    $('.nd_visualshortcodes_save_render').find('.nd-visualshortcodes-settings-links, .nd-visualshortcodes-remove, .nd_backend_preview').remove();
+
     $('.nd_visualshortcodes_save_render').find('.shortcode-processed').removeClass('shortcode-processed nd-visualshortcodes-parent-wrap row shortcode-opened-settings nd-visualshortcodes-sortable nd-visualshortcodes-parent sort-processed ui-sortable').removeClassPrefix('col').removeClassPrefix('nd-visualshortcodes');
     // Replace tag name with shortcode name
     $('.nd_visualshortcodes_save_render > [shortcode!=""]').each(function() {
@@ -261,6 +273,7 @@
     });
     var html = $('.nd_visualshortcodes_save_render').html().replace(/(\r\n|\n|\r)/gm, "");
     html.replace(/(<(ndvs_([^0-9]+)[0-9]*))([^>]*)>(.*)(<\/\2>)/g, '[$3$4]\n$5\n[/$3]\n', "g");
+    html.replace("\u2028", "\\u2028").replace("\u2029", "\\u2029");
     while(html.indexOf('<ndvs_') >= 0) {
       html = html.replace(/(<(ndvs_([^0-9]+)[0-9]*))([^>]*)>(.*)(<\/\2>)/g, '\n[$3$4]$5[/$3]\n', "g");
     }
@@ -316,58 +329,73 @@
       else {
         if (typeof(settings[i]) == 'string') {
           // Allow to add "[", "]", "<" and ">" to attributes
-          settings[i] = settings[i].replace(/\[/g, '{{').replace(/\]/g, '}}').replace(/\</g, '|{').replace(/\>/g, '|}').replace(/"/, "'");
+          settings[i] = settings[i].replace(/\[/g, '{{').replace(/\]/g, '}}').replace(/\</g, '|{').replace(/\>/g, '|}').replace(/"/g, "'");
         }
         $shortcode.attr(i, settings[i]); 
       }
     };
   }
 
+  function get_from_cache(html) {
+    for(i in cache_shortcode) {
+      if(cache_shortcode[i].raw == html) {
+        return cache_shortcode[i].rendered;
+      }
+    }
+    return '';
+  }
+
   function prepare_to_shortcodes($this) {
+    var html = $this.outerHTML();
+    // Search for this string in the cache
+    //var rendered = get_from_cache(html);
+    global_counter++;
+    if(typeof($this.attr('shortcode')) == 'undefined') {
+      return;
+    }
     $this.find('[shortcode!=""]').each(function() {
       prepare_to_shortcodes($(this));
     });
     if($this.attr('class') == '') {
       $this.removeAttr('class');
     }
-    if(typeof($this.attr('shortcode')) == 'undefined') {
-      return;
-    }
     var attributes = $this.prop("attributes");
     var attrs_string = '';
     $.each(attributes, function() {
       attrs_string += this.name != 'shortcode' ? (' ' + this.name + '="' + this.value + '"') : '';
     });
-    global_counter++;
     // Remove required for sortable plugin tags
     if($this.find('> .nd-visualshortcodes-parent').length) {
       $this.html($this.find('> .nd-visualshortcodes-parent').html());
     }
-    $this.replaceWith('<ndvs_' + $this.attr('shortcode') + global_counter + attrs_string + '>' + $this.html() +'</ndvs_' + $this.attr('shortcode') + global_counter + '>');
+    // Save in the cache
+    //cache_shortcode.push({'raw': html, 'rendered': rendered});
+    rendered = '<ndvs_' + $this.attr('shortcode') + global_counter + attrs_string + '>' + $this.html() +'</ndvs_' + $this.attr('shortcode') + global_counter + '>';
+    $this.replaceWith(rendered);
   }
 
   function nd_visualshortcodes_link_text_update($this) {
     if($('#' + $this.attr('data-id')).prev('.nd_visualshortcodes').length) {
       $this.text($this.attr('data-disable-text'));
       $('#' + $this.attr('data-id')).hide();
-      $('#' + $this.attr('data-id')).parents('.text-format-wrapper').find('.filter-wrapper').hide();
+      //$('#' + $this.attr('data-id')).parents('.text-format-wrapper').find('.filter-wrapper').hide();
     }
     else {
       $this.text($this.attr('data-enable-text'));
       $('#' + $this.attr('data-id')).show();
-      $('#' + $this.attr('data-id')).parents('.text-format-wrapper').find('.filter-wrapper').show();
+      //$('#' + $this.attr('data-id')).parents('.text-format-wrapper').find('.filter-wrapper').show();
     }
   }
 
   function nd_visualshortcodes_add_form($this) {
     nd_visualshortcodes_add_overlay();
     var id = $this.parents('.nd_visualshortcodes').next().attr('id');
-    var data_format = $('.nd_visualshortcodes_links[data-id="' + id +'"]').attr('data-format');
+    var data_format = $('.nd_visualshortcodes_links[data-id="' + id +'"]').data('format');
     var data_shortcode = $this.parents('.shortcode-processed').attr('shortcode');
     $('.nd_visualshortcodes_add_link_active').removeClass('nd_visualshortcodes_add_link_active');
     // Mark the link which have opened the Add Form, so will know there to insert the shortcode
     $this.addClass('nd_visualshortcodes_add_link_active');
-    $.post(Drupal.settings.basePath + '?q=admin/ajax/nd_visualshortcodes/shortcodes_list', {format: data_format, shortcode: data_shortcode}, function(result) {
+    $.post(Drupal.settings.basePath + '?q=ajax/nd_visualshortcodes/shortcodes_list', {format: data_format, shortcode: data_shortcode}, function(result) {
       $('#nd-visualshortcodes-shortcode-add-form').html(result);
       $('#nd-visualshortcodes-shortcode-add-form').dialog('open');
       nd_visualshortcodes_remove_overlay();
@@ -435,6 +463,13 @@
           var settings = _shortcode_form_to_settings($('#nd-visualshortcodes-shortcode-settings'));
           // Load settings to shortcode text and attributes values
           _settings_to_shortcode_attrs(settings, $('.shortcode-opened-settings'));
+          // If this is not child element - upload the preview
+          if($('.shortcode-opened-settings > .border-style').hasClass('border-none')) {
+            $.post(Drupal.settings.basePath + '?q=ajax/nd_visualshortcodes/ajax_backend_shortcode_preview', {attrs: settings, shortcode: $('.shortcode-opened-settings').attr('shortcode')}, function(data) {
+              $('.shortcode-opened-settings .nd_backend_preview').remove();
+              $('.shortcode-opened-settings .border-style').append(data);
+            });
+          }
           // Attach Drupal behaviours to updated element to allow scripts made some custom works
           Drupal.attachBehaviors($('.shortcode-opened-settings').parent(), Drupal.settings);
           $('.shortcode-opened-settings').find('.nd-visualshortcodes-settings-links:first').css('display', 'block').prepend('<span class = "saving-info btn btn-xs btn-success">' + Drupal.t('Saved.') + '</span>')
@@ -448,6 +483,7 @@
           // Save updated shortcodes to textarea code
           nd_visualshortcodes_save($('.shortcode-opened-settings').parents('.nd_visualshortcodes').next());
           $(this).dialog( "close" );
+          return false;
         },
         "Delete": function() {
           if (!Drupal.settings.nd_visualshortcodes.confirm_delete || confirm(Drupal.t('Delete shortcode?'))) {
@@ -456,9 +492,11 @@
             nd_visualshortcodes_save($('.nd_visualshortcodes_active').next());
             $(this).dialog( "close" ); 
           }
+          return false;
         },
         "Cancel": function() {
           $(this).dialog( "close" );
+          return false;
         }
       },
     });
@@ -476,7 +514,7 @@
         "Add": function() {
           nd_visualshortcodes_add_overlay();
           var data_shortcode = $('.nd_visualshortcodes_enabled_links .active').attr('data-shortcode');
-          $.post(Drupal.settings.basePath + '?q=admin/ajax/nd_visualshortcodes/shortcodes_list_add', {shortcode: data_shortcode}, function(result) {
+          $.post(Drupal.settings.basePath + '?q=ajax/nd_visualshortcodes/shortcodes_list_add', {shortcode: data_shortcode}, function(result) {
             $('.nd-visualshortcodes-added-shortcode').removeClass('nd-visualshortcodes-added-shortcode');
             // If this is main ADD button appear at the begining of the layout
             if($('.nd_visualshortcodes_add_link_active').parent().hasClass('nd-visualshortcodes-main-add')) {

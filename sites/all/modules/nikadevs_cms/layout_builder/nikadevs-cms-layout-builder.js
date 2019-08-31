@@ -87,6 +87,7 @@
 
       $('.layout').sortable({
         itemSelector: '.sortable',
+        delay: 150,
         placeholder: '<div class = "layout-builder-row-placeholder"></div>',
         isValidTarget: function  (item, container) {
           if(item.is(".row") && container.el.is('.layout') || item.is(".col") && container.el.is('.sortable-parent')) {

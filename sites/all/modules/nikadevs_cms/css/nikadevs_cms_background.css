@@ -1,5 +1,4 @@
 .blur-page {
-  background-image: url("../img/svg/loader.svg"), none;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 40px;
@@ -53,4 +52,33 @@
 }
 .blur-page .blur-box img {
   visibility: hidden;
+}
+
+/* Overlay */
+.bg-dark-alfa-10 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.bg-dark-alfa-20 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.bg-dark-alfa-30 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.bg-dark-alfa-40 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.bg-dark-alfa-50 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bg-dark-alfa-60 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.bg-dark-alfa-70 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.bg-dark-alfa-80 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.bg-dark-alfa-90 .overlay-class{
+  background-color: rgba(0, 0, 0, 0.9);
 }

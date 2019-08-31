@@ -49,7 +49,7 @@ function stability_cms_menu() {
  */
 function stability_cms_custom_theme() {
   // Allow the user to login with default theme
-  if (isset($_GET['theme']) && $_GET['theme'] == 'seven' && ($_GET['q'] == 'user' || $_GET['q'] == 'user/login')) {
+  if (isset($_GET['theme']) && $_GET['theme'] == 'seven') {
     return 'seven';
   }
 }
@@ -163,7 +163,7 @@ function stability_cms_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = t('Send Comment');
   }
   if($form_id == 'contact_site_form') {
-    $form['#prefix'] = '<h2>' . t('Контактная форма') . '</h2>';
+    $form['#prefix'] = '<h2>' . t('Contact Form') . '</h2>';
     $form['name']['#prefix'] = '<div class = "row"><div class = "col-md-4">';
     $form['mail']['#prefix'] = '</div><div class = "col-md-4">';
     $form['subject']['#prefix'] = '</div><div class = "col-md-4">';
@@ -216,35 +216,35 @@ function stability_cms_form_alter(&$form, &$form_state, $form_id) {
   if($form_id == 'blog_node_form') {
     $form['field_video_iframe']['#states'] = array(
       'visible' => array(
-        '.field-name-field-blog-type select' => array('value' => t('Video')),
+        '.field-name-field-blog-type select' => array('value' => 'Video'),
       )
     );
     $form['field_images']['#states'] = array(
       'visible' => array(
-        '.field-name-field-blog-type select, .a' => array('!value' => t('Video')),
-        '.field-name-field-blog-type select, .ab' => array('!value' => t('Link')),
-        '.field-name-field-blog-type select, .abc' => array('!value' => t('Quote')),
-        '.field-name-field-blog-type select, .abd' => array('!value' => t('Audio')),
-        '.field-name-field-blog-type select, .abe' => array('!value' => t('Audio iFrame')),
+        '.field-name-field-blog-type select, .a' => array('!value' => 'Video'),
+        '.field-name-field-blog-type select, .ab' => array('!value' => 'Link'),
+        '.field-name-field-blog-type select, .abc' => array('!value' => 'Quote'),
+        '.field-name-field-blog-type select, .abd' => array('!value' => 'Audio'),
+        '.field-name-field-blog-type select, .abe' => array('!value' => 'Audio iFrame'),
       )
     );
     $form['body']['#states'] = array(
       'visible' => array(
-        '.field-name-field-blog-type select, .a' => array('!value' => t('Video')),
-        '.field-name-field-blog-type select, .ab' => array('!value' => t('Image')),
-        '.field-name-field-blog-type select, .abc' => array('!value' => t('Gallery')),
-        '.field-name-field-blog-type select, .abd' => array('!value' => t('Audio')),
-        '.field-name-field-blog-type select, .abe' => array('!value' => t('Audio iFrame')),
+        '.field-name-field-blog-type select, .a' => array('!value' => 'Video'),
+        '.field-name-field-blog-type select, .ab' => array('!value' => 'Image'),
+        '.field-name-field-blog-type select, .abc' => array('!value' => 'Gallery'),
+        '.field-name-field-blog-type select, .abd' => array('!value' => 'Audio'),
+        '.field-name-field-blog-type select, .abe' => array('!value' => 'Audio iFrame'),
       )
     );
     $form['field_audio']['#states'] = array(
       'visible' => array(
-        '.field-name-field-blog-type select' => array('value' => t('Audio')),
+        '.field-name-field-blog-type select' => array('value' => 'Audio'),
       )
     );
     $form['field_audio_iframe']['#states'] = array(
       'visible' => array(
-        '.field-name-field-blog-type select' => array('value' => t('Audio iFrame')),
+        '.field-name-field-blog-type select' => array('value' => 'Audio iFrame'),
       )
     );
   }
@@ -371,15 +371,6 @@ function stability_cms_block_view($delta) {
       $block = array('subject' => t('Contact Us'), 'content' => theme('stability_cms_contact_us_block', array('short' => TRUE)));
       break;
     case 'gmap':
-      drupal_add_js('http://maps.google.com/maps/api/js?sensor=true', array('external' => TRUE, 'cache' => FALSE));
-      drupal_add_js(drupal_get_path('theme', 'stability') . '/vendor/jquery.gmap3.min.js');
-      drupal_add_js(drupal_get_path('theme', 'stability') . '/js/contact.js');
-      drupal_add_js(array('enjoyit_flat_theme' => array(
-          'gmap_lat' => theme_get_setting('gmap_lat'),
-          'gmap_lng' => theme_get_setting('gmap_lng'),
-          'gmap_zoom' => theme_get_setting('gmap_zoom')
-        )
-      ), 'setting');    
       $block = array('subject' => '', 'content' => '<div class="googlemap-wrapper"><div id="map_canvas" class="map-canvas"></div></div>');
       break;
     case 'contact_form':

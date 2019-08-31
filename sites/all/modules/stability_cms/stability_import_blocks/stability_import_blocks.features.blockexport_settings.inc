@@ -2826,7 +2826,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [delimiter class = "visible-sm visible-xs"][/delimiter]',
   'info' => 'Our Philosophy',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 2,
@@ -2848,7 +2849,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [delimiter class = "visible-sm visible-xs"][/delimiter]',
   'info' => 'Our Mission',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 3,
@@ -2856,7 +2858,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 [call_to_action class="centered" link = "/contact" link_text = "Contact Us"]<h2>Faced a Problem?</h2><p>We will gladly help you!</p>[/call_to_action]
 ',
   'info' => 'Faced a Problem?',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 4,
@@ -2884,7 +2887,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [/col]
 [/row]',
   'info' => 'Circle Icons Boxed 3cols',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 5,
@@ -2947,7 +2951,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [delimiter class = "no-top-margin"][/delimiter]',
   'info' => 'Circle Icons Boxed Small 3 Cols and Image',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 6,
@@ -2973,7 +2978,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 [/tabs]
 [delimiter class = "visible-sm visible-xs"][/delimiter]',
   'info' => 'Why Choose Us',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 7,
@@ -2984,7 +2990,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 [progress title = "Wordpress" percent = "70" animation = "fadeInRight" delay = 500][/progress]
 ',
   'info' => 'Our Capabilities',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 8,
@@ -2994,13 +3001,15 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 [progress title = "HTML5&CSS3" percent = "90"][/progress]
 [progress title = "Wordpress" percent = "70"][/progress]',
   'info' => 'Our Skills',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 9,
   'body' => '[delimiter][/delimiter]',
   'info' => 'Spacer Large',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 10,
@@ -3024,21 +3033,24 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 <p>Nullam volutpat quis sem id iaculis. Fusce interdum, quam ac aliquam vulputate, orci nisl imperdiet turpis, non posuere massa ipsum et lorem. Pellentesque facilisis, orci nec gravida accumsan, massa elit hendrerit lacus, tortor.</p>
 [button class="btn-primary" link = "contact"]Learn More[/button]',
   'info' => 'About Us 3 Col',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 13,
   'body' => '<p>Mauris et vulputate est. Integer viverra nunc vitae facilisis cursus. Quisque ac ultricies quam, a molestie leo. Nulla convallis turpis id vulputate aliquam. Nulla facilisi. Nam tincidunt odio dignissim dui lobortis adipiscing.</p>
 <p>Nullam volutpat quis sem id iaculis. Fusce interdum, quam ac aliquam vulputate, orci nisl imperdiet turpis, non posuere massa ipsum et lorem. Pellentesque facilisis, orci nec gravida accumsan, massa elit hendrerit lacus, tortor.</p>',
   'info' => 'About Us 2 Col',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 14,
   'body' => 'Mauris et vulputate est. Integer viverra nunc vitae facilisis cursus. Quisque ac ultricies quam, a molestie leo. Nulla convallis turpis id vulputate aliquam. Nulla facilisi. Nam tincidunt odio dignissim dui lobortis adipiscing.
 									',
   'info' => 'About Us 1 Col',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 15,
@@ -3055,7 +3067,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   <p>Curabitur eget rhoncus quam, vel elementum arcu. In accumsan tincidunt varius. Nunc vel ligula sit amet nibh hendrerit gravida id et</p>
 [/call_to_action]',
   'info' => 'Welcome Call to Action',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 17,
@@ -3101,7 +3114,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [/col]
 [/row]',
   'info' => 'Services Big 3 Col 2 Row',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 18,
@@ -3113,7 +3127,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [accordion title = "Accordion Panel #5"]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet sodales lacinia. Curabitur ut purus tincidunt, iaculis elit a, eleifend augue. Phasellus blandit augue vel sollicitudin blandit.[/accordion]
 [/accordions]',
   'info' => 'Our Features Accordion',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 19,
@@ -3125,7 +3140,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [delimiter class = "visible-xs visible-sm"][/delimiter]',
   'info' => 'What Clients Say',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 20,
@@ -3161,7 +3177,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'Circle Icons 4 Item Flip',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 21,
@@ -3230,7 +3247,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [/col]
 [/row]',
   'info' => 'What We Do',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 22,
@@ -3260,7 +3278,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'Squared Icons 3 Item',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 23,
@@ -3285,7 +3304,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'We Provide Web Solutions',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 24,
@@ -3303,7 +3323,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [spacer][/spacer]',
   'info' => 'We Are Stability',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 25,
@@ -3346,7 +3367,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [/pricing_table_col]
 [/pricing_table]',
   'info' => 'Service Packages',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 26,
@@ -3355,7 +3377,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 [progress title = "JavaScript" percent = "60" animation = "fadeInRight"][/progress]
 [progress title = "HTML5&CSS3" percent = "90" animation = "fadeInRight"][/progress]',
   'info' => 'Our Skills 4 Item',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 27,
@@ -3385,7 +3408,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'Squared Red Animated Icons 3 Item',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 28,
@@ -3400,7 +3424,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 </div>
 [button link = "contact" class = "btn-primary"]Read More[/button]',
   'info' => 'Our Mission Text List Link',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 29,
@@ -3418,7 +3443,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 </div>
 [button link = "contact" class = "btn-primary"]Read More[/button]',
   'info' => 'Our Services List Link',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 30,
@@ -3427,7 +3453,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   <p>Curabitur eget rhoncus quam, vel elementum arcu. In accumsan tincidunt varius. Nunc vel ligula sit amet nibh hendrerit gravida id et</p>
 [/call_to_action]',
   'info' => 'Welcome Call to Action Centered',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 31,
@@ -3457,7 +3484,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'Squared Icons Centered 3 Item',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 32,
@@ -3474,13 +3502,15 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   </ul>
 </div>',
   'info' => 'Featured Services List',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 33,
   'body' => '[video width = "612" height = "343"]player.vimeo.com/video/7449107?title=0&byline=0&portrait=0&color=dc2a0b[/video]',
   'info' => 'Video',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 34,
@@ -3515,7 +3545,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'Image Text Link 3 Col',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 35,
@@ -3546,7 +3577,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
 
 [/row]',
   'info' => 'Icon Title Text 4 Cols',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 36,
@@ -3557,7 +3589,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [featured_box title = "Filterable Portfolio" subtitle = "Donec id tincidunt diam Integer laoreet dolor" icon = "fa fa-th-large"]Integer auctor accumsan curs llam commodo velit[/featured_box]
 [/featured_boxes]',
   'info' => 'Featured Boxes Parallax',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 37,
@@ -3617,7 +3650,8 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [/col]
 [/row]',
   'info' => 'What We Do Icons 3 Col 2 Row',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 38,
@@ -3660,13 +3694,15 @@ Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit n
   [/pricing_table_col]
 [/pricing_table]',
   'info' => 'Pricing Service Packages',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_custom'][] = array(
   'bid' => 39,
   'body' => '[delimiter class = "visible-sm visible-xs"][/delimiter]',
   'info' => 'Delimiter mobile',
-  'format' => 'full_html',
+  'format' => 'fullnhtml
+media_wysiwyg_include_browser_js()',
 );
   $export['block_node_type'][] = array(
   'module' => 'views',

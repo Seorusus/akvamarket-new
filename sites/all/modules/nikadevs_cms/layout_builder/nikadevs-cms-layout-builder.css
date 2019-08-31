@@ -159,6 +159,9 @@
 .form-group label{
   display: inline-block;
 }
+#content{
+  clear: none !important;
+}
 
 /* UI Dialog */
 .ui-dialog {

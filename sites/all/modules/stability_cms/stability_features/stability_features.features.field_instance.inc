@@ -459,6 +459,132 @@ function stability_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'file-image-field_file_image_alt_text'
+  $field_instances['file-image-field_file_image_alt_text'] = array(
+    'bundle' => 'image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Alternative text is used by screen readers, search engines, and when the image cannot be loaded. By adding alt text you improve accessibility and search engine optimization.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'media_link' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'media_original' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'file',
+    'field_name' => 'field_file_image_alt_text',
+    'label' => 'Alt Text',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -4,
+    ),
+  );
+
+  // Exported field_instance: 'file-image-field_file_image_title_text'
+  $field_instances['file-image-field_file_image_title_text'] = array(
+    'bundle' => 'image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'media_link' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'media_original' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'file',
+    'field_name' => 'field_file_image_title_text',
+    'label' => 'Title Text',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => -3,
+    ),
+  );
+
   // Exported field_instance: 'node-blog-body'
   $field_instances['node-blog-body'] = array(
     'bundle' => 'blog',
@@ -549,6 +675,7 @@ function stability_features_field_default_field_instances() {
           'image' => 'image',
           'video' => 0,
         ),
+        'browser_plugins' => array(),
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
@@ -641,7 +768,7 @@ function stability_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
@@ -681,7 +808,7 @@ function stability_features_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => 'blog_704_328',
         ),
         'type' => 'image',
         'weight' => 5,
@@ -719,6 +846,7 @@ function stability_features_field_default_field_instances() {
         'allowed_types' => array(
           0 => 'image',
         ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -897,6 +1025,7 @@ function stability_features_field_default_field_instances() {
         'allowed_types' => array(
           0 => 'image',
         ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -1205,6 +1334,7 @@ function stability_features_field_default_field_instances() {
           'image' => 'image',
           'video' => 0,
         ),
+        'browser_plugins' => array(),
         'progress_indicator' => 'throbber',
       ),
       'type' => 'media_generic',
@@ -1547,6 +1677,7 @@ function stability_features_field_default_field_instances() {
         'allowed_types' => array(
           0 => 'image',
         ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -2267,6 +2398,7 @@ function stability_features_field_default_field_instances() {
         'allowed_types' => array(
           0 => 'image',
         ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -2343,6 +2475,7 @@ function stability_features_field_default_field_instances() {
     'label' => 'Button Link',
     'required' => 0,
     'settings' => array(
+      'absolute_url' => 1,
       'attributes' => array(
         'class' => '',
         'configurable_title' => 0,
@@ -2356,6 +2489,7 @@ function stability_features_field_default_field_instances() {
       'enable_tokens' => 1,
       'rel_remove' => 'default',
       'title' => 'optional',
+      'title_label_use_field_label' => FALSE,
       'title_maxlength' => 128,
       'title_value' => '',
       'url' => 0,
@@ -2394,7 +2528,7 @@ function stability_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_categories',
-    'label' => 'Categories',
+    'label' => 'Project Details',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -2457,6 +2591,7 @@ function stability_features_field_default_field_instances() {
         'allowed_types' => array(
           0 => 'image',
         ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'throbber',
       ),
@@ -2586,6 +2721,8 @@ function stability_features_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Alt Text');
+  t('Alternative text is used by screen readers, search engines, and when the image cannot be loaded. By adding alt text you improve accessibility and search engine optimization.');
   t('Audio');
   t('Audio iFrame URL');
   t('Audio iframe');
@@ -2593,7 +2730,6 @@ function stability_features_field_default_field_instances() {
   t('Body');
   t('Button Link');
   t('Catalog');
-  t('Categories');
   t('Category');
   t('Characteristics');
   t('Colors');
@@ -2617,6 +2753,7 @@ function stability_features_field_default_field_instances() {
   t('Page Type');
   t('Position');
   t('Profile');
+  t('Project Details');
   t('Project Info');
   t('Rating');
   t('Review');
@@ -2626,6 +2763,8 @@ function stability_features_field_default_field_instances() {
   t('Skype');
   t('Tags');
   t('Timeline Details');
+  t('Title Text');
+  t('Title text is used in the tool tip when a user hovers their mouse over the image. Adding title text makes it easier to understand the context of an image and improves usability.');
   t('Twitter');
   t('Video iframe');
   t('Video iframe URL');

@@ -7,7 +7,7 @@
   padding: 0 0 12px 0;
   margin: 15px 0 0 0;
 }
-.nd_visualshortcodes h3 {
+.nd_visualshortcodes .border-style > h3 {
   font-size: 1.1em;
   margin: 0 0 9px 0;
   overflow: hidden;
@@ -459,4 +459,32 @@ html.js input.throbbing.form-control {
   top: 50%;
   position: absolute;
   font-size: 18px;
+}
+
+/* Live Preview adds */
+.nd-live-preview .border-style{
+  border: none;
+}
+.nd-live-preview .border-style > h3,
+.nd_visualshortcodes.nd-live-preview .node > h2,
+.nd_visualshortcodes.nd-live-preview .node > .contextual-links-wrapper{
+  display: none;
+}
+.nd_visualshortcodes:hover .border-style > h3,
+.nd_active_layout h3{
+  display: block !important;
+}
+.nd_visualshortcodes:hover .border-style,
+.nd_active_layout .border-style{
+  border: 1px dashed #999;
+}
+.border-none,
+.nd_visualshortcodes:hover .border-none{
+  border: none !important;
+}
+.nd_backend_preview img{
+  max-width: 100%;
+}
+.nd_visualshortcodes .border-none > h3 {
+  margin-bottom: 0 !important;
 }

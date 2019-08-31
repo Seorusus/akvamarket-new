@@ -17,43 +17,11 @@ function stability_features_views_api($module = NULL, $api = NULL) {
 function stability_features_image_default_styles() {
   $styles = array();
 
-  // Exported image style: blog_1026_440.
-  $styles['blog_1026_440'] = array(
-    'name' => 'blog_1026_440',
-    'label' => 'Blog (1026x440)',
-    'effects' => array(
-      17 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
-        'name' => 'image_scale_and_crop',
-        'data' => array(
-          'width' => 1026,
-          'height' => 440,
-          'retinafy' => 1,
-        ),
-        'weight' => 1,
-      ),
-    ),
-  );
-
   // Exported image style: blog_280_270.
   $styles['blog_280_270'] = array(
-    'name' => 'blog_280_270',
     'label' => 'Blog (280x270)',
     'effects' => array(
       15 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 280,
@@ -67,17 +35,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: blog_281_157.
   $styles['blog_281_157'] = array(
-    'name' => 'blog_281_157',
     'label' => 'Blog (281x157)',
     'effects' => array(
       16 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 281,
@@ -91,17 +51,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: blog_60x60.
   $styles['blog_60x60'] = array(
-    'name' => 'blog_60x60',
     'label' => 'Blog (60x60)',
     'effects' => array(
       3 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 60,
@@ -115,17 +67,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: blog_704_328.
   $styles['blog_704_328'] = array(
-    'name' => 'blog_704_328',
     'label' => 'Blog (704x328)',
     'effects' => array(
       14 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 702,
@@ -139,17 +83,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: client_270x90.
   $styles['client_270x90'] = array(
-    'name' => 'client_270x90',
     'label' => 'Client (270x90)',
     'effects' => array(
       8 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 270,
@@ -163,17 +99,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: page_346x332.
   $styles['page_346x332'] = array(
-    'name' => 'page_346x332',
     'label' => 'Page (346x332)',
     'effects' => array(
       9 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 346,
@@ -187,17 +115,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: page_558x332.
   $styles['page_558x332'] = array(
-    'name' => 'page_558x332',
     'label' => 'Page (558x332)',
     'effects' => array(
       5 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 558,
@@ -211,17 +131,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: people_258x258.
   $styles['people_258x258'] = array(
-    'name' => 'people_258x258',
     'label' => 'People (258x258)',
     'effects' => array(
       6 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 258,
@@ -235,17 +147,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: people_346x346.
   $styles['people_346x346'] = array(
-    'name' => 'people_346x346',
     'label' => 'People (346x346)',
     'effects' => array(
       7 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 346,
@@ -259,17 +163,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: product_346_470.
   $styles['product_346_470'] = array(
-    'name' => 'product_346_470',
     'label' => 'Product (346x470)',
     'effects' => array(
       22 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 346,
@@ -283,17 +179,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: product_540_470.
   $styles['product_540_470'] = array(
-    'name' => 'product_540_470',
     'label' => 'Product (540x470)',
     'effects' => array(
       21 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 540,
@@ -307,17 +195,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: project_1126_470.
   $styles['project_1126_470'] = array(
-    'name' => 'project_1126_470',
     'label' => 'Project (1126x470)',
     'effects' => array(
       13 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1126,
@@ -331,17 +211,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: project_276x200.
   $styles['project_276x200'] = array(
-    'name' => 'project_276x200',
     'label' => 'Project (276x200)',
     'effects' => array(
       1 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 276,
@@ -355,17 +227,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: project_320_320.
   $styles['project_320_320'] = array(
-    'name' => 'project_320_320',
     'label' => 'Project (320x320)',
     'effects' => array(
       18 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 320,
@@ -379,17 +243,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: project_358x258.
   $styles['project_358x258'] = array(
-    'name' => 'project_358x258',
     'label' => 'Project (358x258)',
     'effects' => array(
       11 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 358,
@@ -403,17 +259,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: project_558x404.
   $styles['project_558x404'] = array(
-    'name' => 'project_558x404',
     'label' => 'Project (558x404)',
     'effects' => array(
       10 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 558,
@@ -427,17 +275,9 @@ function stability_features_image_default_styles() {
 
   // Exported image style: project_640_340.
   $styles['project_640_340'] = array(
-    'name' => 'project_640_340',
     'label' => 'Project (640x340)',
     'effects' => array(
       23 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
-        'effect callback' => 'retina_images_image_scale_and_crop_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'retina_images_image_resize_form',
-        'summary theme' => 'retina_images_image_resize_summary',
-        'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 640,
@@ -514,6 +354,7 @@ function stability_features_node_info() {
       'help' => '',
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }
 
@@ -531,5 +372,6 @@ function stability_features_uc_product_default_classes() {
       'help' => '',
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }

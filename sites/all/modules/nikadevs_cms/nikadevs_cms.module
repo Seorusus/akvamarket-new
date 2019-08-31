@@ -16,20 +16,59 @@ function nikadevs_cms_init() {
     drupal_add_css($module_path . '/support/css/feedback.css');
     drupal_add_js(array('nikadevs_cms' => array('module_path' => $module_path, 'site_mail' => variable_get('site_mail', '') == '' ? 0 : 1)), 'setting');
   }
+  if(strpos($_GET['q'], 'admin/structure/md-slider') !== FALSE) {
+    drupal_add_css('
+    html{
+      direction: ltr;
+    }', 'inline');
+  }
 }
 
 function nikadevs_cms_layout_builder() {
   drupal_add_library('system', 'ui.dialog');
   drupal_add_js(drupal_get_path('module', 'nikadevs_cms') . '/js/switchery.js');
   drupal_add_js(drupal_get_path('module', 'nikadevs_cms') . '/js/jquery-sortable.js');
-  if(function_exists('media_wysiwyg_include_browser_js')) {
-    include_once drupal_get_path('module', 'media') . '/modules/media_wysiwyg/wysiwyg_plugins/media.inc';
-    media_wysiwyg_include_browser_js();
+
+  $form = array();
+  $libraries = drupal_get_library('media');
+  $form['#attached']['library'][] = array('media', 'media_browser');
+  if (!isset($libraries['media_browser_settings'])) {
+    $settings = array(
+      'browserUrl' => url('media/browser', array(
+          'query' => array(
+            'render' => 'media-popup'
+          ))
+      ),
+      'styleSelectorUrl' => url('media/-media_id-/format-form', array(
+          'query' => array(
+            'render' => 'media-popup'
+          ))
+      ),
+      'dialogOptions' => array(
+        'dialogclass' => variable_get('media_dialogclass', 'media-wrapper'),
+        'modal' => (boolean)variable_get('media_modal', TRUE),
+        'draggable' => (boolean)variable_get('media_draggable', FALSE),
+        'resizable' => (boolean)variable_get('media_resizable', FALSE),
+        'minwidth' => (int)variable_get('media_minwidth', 500),
+        'width' => (int)variable_get('media_width', 670),
+        'height' => (int)variable_get('media_height', 280),
+        'position' => variable_get('media_position', 'center'),
+        'overlay' => array(
+          'backgroundcolor' => variable_get('media_backgroundcolor', '#000000'),
+          'opacity' => (float)variable_get('media_opacity', 0.4),
+        ),
+        'zindex' => (int)variable_get('media_zindex', 10000),
+      ),
+    );
+    $form['#attached']['js'][] = array(
+      'data' => array('media' => $settings),
+      'type' => 'setting',
+    );
   }
-  elseif(function_exists('media_include_browser_js')) {
-    include_once drupal_get_path('module', 'media') . '/wysiwyg_plugins/media.inc';
-    media_include_browser_js();
+  else {
+    $form['#attached']['library'][] = array('media', 'media_browser_settings');
   }
+
   drupal_add_css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css', 'external');
 
   // Get all regions for current theme
@@ -90,8 +129,8 @@ function nikadevs_cms_layout_builder() {
     }
     // Process Background settings
     foreach ($layout['rows'] as $r => $row) {
-      if (isset($row['settings']['bg_image_type']) && $row['settings']['bg_image_type'] == 'image' && $row['settings']['bg_image_fid']) {
-        $file = file_load($row['settings']['bg_image_fid'])->uri;
+      if (isset($row['settings']['bg_image_type']) && $row['settings']['bg_image_type'] == 'image' && isset($row['settings']['bg_image_fid']) && $row['settings']['bg_image_fid']) {
+        $file = file_load($row['settings']['bg_image_fid']);
         if(isset($file->uri)) {
           $layouts[$i]['rows'][$r]['settings']['bg_image_preview'] = theme('image_style', array('style_name' => 'square_thumbnail', 'path' => $file->uri));
         }
@@ -199,7 +238,7 @@ function nikadevs_cms_preprocess_block(&$variables) {
       }
     }
     $variables['classes_array'][] = isset($settings[$id]['class']) ? $settings[$id]['class'] : '';
-    $variables['tag'] = isset($settings[$id]['tag']) ? $settings[$id]['tag'] : 'div';
+    $variables['tag'] = isset($settings[$id]['tag']) && $settings[$id]['tag'] ? $settings[$id]['tag'] : 'div';
   }
 }
 
@@ -315,6 +354,16 @@ function nikadevs_cms_theme() {
 }
 
 /**
+ * Implements hook_custom_theme().
+ */
+function nikadevs_cms_custom_theme() {
+  // Allow the user to login with default theme
+  if (isset($_GET['custom_theme']) && $_GET['custom_theme'] == 'seven') {
+    return 'seven';
+  }
+}
+
+/**
  * Implementation of hook_filter_info().
  */
 function nikadevs_cms_filter_info() {
@@ -323,7 +372,7 @@ function nikadevs_cms_filter_info() {
     'description' => t('Alias of Shortcodes with disabled CACHE. Use for dynamic content such as VIEW.'),
     'process callback' => '_nikadevs_cms_shortcode_process',
     'settings callback' => '_shortcode_settings_form',
-    'tips callback' => '_nikadevs_cms_shortcode_filter_tips',
+    //'tips callback' => '_nikadevs_cms_shortcode_filter_tips',
     'cache' => FALSE,
   );
   return $filters;
@@ -367,7 +416,7 @@ function _nikadevs_cms_shortcode_process($text, $filter) {
   }
 
   // Save the Shortcodes in the local cache.
-  _shortcode_tags($shortcodes_enabled);
+  _shortcode_get_shortcodes($shortcodes_enabled);
 
   // Processing recursively, now embeding tags within other tags is supported!
   $chunks = preg_split('!(\[{1,2}.*?\]{1,2})!', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -431,7 +480,7 @@ function _nikadevs_cms_shortcode_process($text, $filter) {
         array_unshift($heap_index, '_string_');
         array_unshift($heap, _shortcode_process_tag($m));
         // In shortcode can be used another Format with differents shortcodes, so restore the cache
-        _shortcode_tags($shortcodes_enabled);
+        _shortcode_get_shortcodes($shortcodes_enabled);
       }
       elseif ($c[0] == '/') {
         // Indicate a closing tag, so we process the heap.
@@ -458,7 +507,7 @@ function _nikadevs_cms_shortcode_process($text, $filter) {
             );
             $str = _shortcode_process_tag($m);
             // In shortcode can be used another Format with differents shortcodes, so restore the cache
-            _shortcode_tags($shortcodes_enabled);
+            _shortcode_get_shortcodes($shortcodes_enabled);
             array_unshift($heap_index, '_string_');
             array_unshift($heap, $str);
             $found = TRUE;

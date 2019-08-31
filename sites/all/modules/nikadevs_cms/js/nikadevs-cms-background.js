@@ -1,12 +1,12 @@
 (function ($) {
 
+var i = 0;
   Drupal.behaviors.nikadevs_background = {
     attach: function (context, settings) {
-      $('.upload_bg_image').once('nikadevs_background', function() {
-        console.log('1');
-        $('.upload_bg_image').click(function() {
+
+        $('.upload_bg_image', context).click(function() {
           if($('body > .ui-dialog').length) {
-            return;
+            //return;
           }
           $this = $(this);
           globalOptions = {};
@@ -22,7 +22,7 @@
           }, globalOptions);
           return false;
         });
-      });
+
     }
   };
 

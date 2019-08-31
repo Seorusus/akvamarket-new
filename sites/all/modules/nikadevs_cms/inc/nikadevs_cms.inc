@@ -76,7 +76,7 @@ function _nikadevs_cms_get_active_layout() {
       $layout['rows'][$key]['settings']['prefix'] = isset($layout['rows'][$key]['settings']['prefix']) ? $layout['rows'][$key]['settings']['prefix'] : '';
       $layout['rows'][$key]['settings']['suffix'] = isset($layout['rows'][$key]['settings']['suffix']) ? $layout['rows'][$key]['settings']['suffix'] : '';
       // Process Background settings
-      if (isset($row['settings']['bg_image_type']) && $row['settings']['bg_image_type'] == 'image' && $row['settings']['bg_image_fid'] && ($file = file_load($row['settings']['bg_image_fid']))) {
+      if (isset($row['settings']['bg_image_type']) && $row['settings']['bg_image_type'] == 'image' && isset($row['settings']['bg_image_fid']) && $row['settings']['bg_image_fid'] && ($file = file_load($row['settings']['bg_image_fid']))) {
         $bg_image = '<div class="fwb-bg ' . ($row['settings']['bg_image_parallax'] ? 'fwb-parallax' : '') . ' fwb-fixed" style = "background-image: url(\'' . file_create_url($file->uri) . '\');" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="200">
         ' . (isset($row['settings']['bg_image_overlay']) && $row['settings']['bg_image_overlay'] ? '<div class="overlay"></div>' : '') . '
         </div>';
@@ -90,7 +90,7 @@ function _nikadevs_cms_get_active_layout() {
         $bg_video = '<div id = "wrap-' . $layout['rows'][$key]['attributes']['id'] . '" data-stellar-background-ratio = "0.7">
           <a id="video" class="player" data-property="{videoURL: \'' . $row['settings']['bg_video'] . '\', containment:\'#wrap-' . $layout['rows'][$key]['attributes']['id'] . '\', showControls:true, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, addRaster:false, quality:\'default\'}"></a>';
         $layout['rows'][$key]['settings']['prefix'] .= $bg_video;
-        $layout['rows'][$key]['settings']['prefix'] .= $row['settings']['bg_video_overlay'] ? '<div class="overlay"></div>' : '';
+        $layout['rows'][$key]['settings']['prefix'] .= isset($row['settings']['bg_video_overlay']) && $row['settings']['bg_video_overlay'] ? '<div class="overlay"></div>' : '';
         $layout['rows'][$key]['settings']['suffix'] .= '</div>';
         $layout['rows'][$key]['wrap']['attributes']['class'][] = 'full-width-box';
         drupal_add_js(drupal_get_path('module', 'nikadevs_cms') . '/js/jquery.mb.YTPlayer.js');
