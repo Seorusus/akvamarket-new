@@ -32,6 +32,7 @@ GEM
       http_parser.rb (~> 0.6.0)
     eventmachine (1.0.7)
     execjs (2.3.0)
+    ffi (1.9.6)
     ffi (1.9.6-x86-mingw32)
     formatador (0.2.5)
     guard (2.12.4)
@@ -54,6 +55,7 @@ GEM
     guard-shell (0.7.1)
       guard (>= 2.0.0)
       guard-compat (~> 1.0)
+    hitimes (1.2.2)
     hitimes (1.2.2-x86-mingw32)
     http_parser.rb (0.6.0)
     json (1.8.2)
@@ -68,6 +70,10 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     pry (0.10.1-x86-mingw32)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -90,9 +96,10 @@ GEM
       hitimes
     wdm (0.1.0)
     win32console (1.3.2-x86-mingw32)
-    yajl-ruby (1.2.1)
+    yajl-ruby (1.4.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
